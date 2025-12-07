@@ -8,4 +8,6 @@ class FilterParams(BaseModel):
     order_by: Literal["created_at", 'updated_at'] = 'created_at'
     tags: list[str] = []
 
-
+    model_config = {
+        'extra': "forbid"
+    }
