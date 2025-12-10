@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Path, Body
 from models.item import Item
-from models.userOut import User
+from models.userIn import User
 from typing import Annotated
 
 app = FastAPI()
