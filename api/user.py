@@ -1,4 +1,3 @@
-from typing import Any
 from fastapi import FastAPI
 from models.userBase import UserBase
 from models.userIn import UserIn
