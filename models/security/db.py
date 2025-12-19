@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from models.security.user import User
 
-class UserInDB(BaseModel):
+class UserInDB(User):
     hashed_password: str
