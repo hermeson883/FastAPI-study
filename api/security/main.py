@@ -10,7 +10,7 @@ from pwdlib import PasswordHash
 from typing import Annotated
 import jwt
 
-SECRET_KEY = "ddca5cea1c061fb828d01bd84644cf0170d35f6967ff2976076efabd04bcccde"
+SECRET_KEY = "67466a56206bae5c5b8deb06e742105a25ead6f03761e305a5e9b9c491c00a38"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -48,7 +48,7 @@ def authenticate_user(fake_db, username:str, password:str):
     
     if not verify_password(password, user.hashed_password):
         return False
-    return False
+    return user
 
 def create_access_token(data:dict, expire_delta: timedelta | None = None):
     to_encode = data.copy()
@@ -106,7 +106,7 @@ async def login_for_access_token(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": user.username}, expire_delta=access_token_expires
     )
     return Token(access_token=access_token, token_type="bearer")
 
@@ -123,5 +123,3 @@ async def read_own_items(
     current_user: Annotated[User, Depends(get_current_active_user)],
 ):
     return [{"item_id": "Foo", "owner": current_user.username}]
-
-
